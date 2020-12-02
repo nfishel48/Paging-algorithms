@@ -6,5 +6,5 @@ This class represents a single "try" or as im calling them to not get confused w
 */
 public class Round {
     public int frames; //Number of frames in memory
-    public List<Integer> pages = new ArrayList<>(); //Page numbers requested by the cpu
+    public List<Integer> pages = new ArrayList<>(); //Page numbers requested by the cpu AKA refference string
 }
