@@ -53,7 +53,6 @@ class driver{
         while(in.hasNextInt()){
             roundList.add(new Round());
             roundList.get(i).frames = in.nextInt();
-            System.out.println(roundList.get(i).frames); //debug
             while(!done){
                 int num = in.nextInt();
                 if (num == -1){
@@ -61,12 +60,10 @@ class driver{
                 }
                 else{
                     roundList.get(i).pages.add(num);
-                    System.out.print(num+" "); //debug
                 }
             }
             done = false;
             i++;
-            System.out.println(); //debug
         }
         in.close();
     }
