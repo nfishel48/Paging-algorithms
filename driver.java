@@ -1,11 +1,14 @@
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 class driver{
 
-    public int frames; //Number of frames in memory
-    public int[] pages; //Page numbers requested by the cpu
-    public static void main(String args[]){
-
-        //get the input and set varibles
-
+    public static int frames; //Number of frames in memory
+    public static int[] pages; //Page numbers requested by the cpu
+    public static List<Round> roundList = new ArrayList<>();
+    public static void main(String args[]) throws FileNotFoundException {
+        getInput(getFile());  //get the input and set varibles
         //loop 4 times to run all algorithms
 
         //Display the results
@@ -27,6 +30,25 @@ class driver{
 
         //5. Return to main.
 
+    }
+
+    public static void getInput(File input) throws FileNotFoundException {
+        Scanner in = new Scanner(input);
+        int i = 0;
+        while(in.hasNextLine()){
+            roundList.add(new Round(
+                
+            ));
+        }
+
+    }
+
+    public static File getFile(){
+        Scanner stdIn = new Scanner(System.in);
+        System.out.println("Please enter the path of input file.");
+        String filePath = stdIn.nextLine();
+        File input = new File(filePath);
+        return input;
     }
 
 
