@@ -60,6 +60,11 @@ public class lfu {
                 faults++;
             }
         }
+        memFrames.clear();
+        timesUsed.clear();
+        age.clear();
+        faultList.clear();
+        faults++;
         System.out.println("LFU:"+faults);
         return faults;
     } 

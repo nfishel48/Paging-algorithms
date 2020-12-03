@@ -20,7 +20,7 @@ public class Optimal {
                 }
                 else{//find the optimal page to switch out 
                     int exists = 0;
-                    for(int j = 0; j< ref_len; j++){ //loop through the refrence values 
+                    for(int j = 0; j< mem.size(); j++){ //loop through the refrence values 
                         
                         if(mem.contains(round.pages.get(j))){
                             exists = j; // the new longest until it is needed
