@@ -55,5 +55,6 @@ public class Fifo {
             System.out.println(faultList.get(i).refString);
         }
     }
+	}
     
-}
+

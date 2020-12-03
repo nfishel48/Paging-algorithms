@@ -20,12 +20,8 @@ public class lru {
                 
                 }
             else{
-                 // Check if current page is not already 
-                // present in the set 
                 if (!s.contains(round.pages.get(i))) 
                 { 
-                    // Find the least recently used pages 
-                    // that is present in the set 
                     int lru = Integer.MAX_VALUE, val=Integer.MIN_VALUE; 
                     Iterator<Integer> itr = s.iterator(); 
                     while (itr.hasNext()) { 
@@ -36,13 +32,9 @@ public class lru {
                             val = temp; 
                         } 
                     } 
-                    // Remove the indexes page 
                     s.remove(val); 
-                   //remove lru from hashmap 
                     memFrames.remove(val); 
-                    // insert the current page 
                     s.add(round.pages.get(i)); 
-                    // Increment page faults 
                     faults++; 
                 } 
                 // Update the current page index 
