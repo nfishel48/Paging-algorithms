@@ -12,11 +12,11 @@ public class lfu {
         for(int i = 0; i< round.pages.size(); i++){
             if (memFrames.contains(round.pages.get(i))){
                 for(int j = 0; j<memFrames.size(); j++){ //loop through to find index of what frame matches the page
-                    int incrementAge = age.get(i); //get the value of the age
+                    int incrementAge = age.get(j); //get the value of the age
                     incrementAge++;
                     age.set(j,incrementAge);//return the modified value
                     if(memFrames.get(j) == round.pages.get(i)){
-                        int increment = timesUsed.get(i); //get the value of how many times this page has been used
+                        int increment = timesUsed.get(j); //get the value of how many times this page has been used
                         increment++;
                         timesUsed.set(j,increment);//return the modified value
                     }
@@ -26,7 +26,7 @@ public class lfu {
                 if(memFrames.size() < round.frames){ 
                     memFrames.add(round.pages.get(i));
                     timesUsed.add(0);//keep track of how many times this varible is used
-                    age.add(0);
+                    age.add(1);
                     for(int j = 0; j<memFrames.size(); j++){ //loop through and increase the age of all pages
                         if(j == i){
                          //do nothing   
@@ -50,11 +50,17 @@ public class lfu {
                             lowestFrequencyIndex = k;
                         }
                     }
-                    memFrames.set(lowestFrequencyIndex, round.pages.get(i));//overwrite the value at the index of 
+                    memFrames.set(lowestFrequencyIndex, round.pages.get(i));//overwrite the value at the index of
+                    for(int j = 0; j<memFrames.size(); j++){ //loop through to find index of what frame matches the page
+                        int incrementAge = age.get(j); //get the value of the age
+                        incrementAge++;
+                        age.set(j,incrementAge);//return the modified value
+                    }
                 }
                 faults++;
             }
         }
+        System.out.println("LFU:"+faults);
         return faults;
     } 
 }

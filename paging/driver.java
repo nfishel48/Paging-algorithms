@@ -38,7 +38,9 @@ class driver{
     public static void runRound(){
         for(int i = 0; i<roundList.size(); i++){
             int fifoFaults = Fifo.swap(roundList.get(i));
-
+            int lruFaults = lru.swap(roundList.get(i));
+            int lfuFaults = lfu.swap(roundList.get(i));
+            
         }
     }
 

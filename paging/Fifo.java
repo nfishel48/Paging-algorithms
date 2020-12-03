@@ -31,6 +31,7 @@ public class Fifo {
         }
         System.out.println("FIFO:"+faults);
         //printTable(round);
+        q.clear();
         return faults;
     }
 

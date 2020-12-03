@@ -3,40 +3,53 @@ import java.util.*;
 
 public class lru {
 
-    public static List<Integer> memFrames = new ArrayList<>();
-    public static List<Integer> timesUsed = new ArrayList<>(); //increment index everytimes it is used
-    public static List<Integer> age = new ArrayList<>(); //how many access have been made since the page has been in the frame together with times used this can caludate freqency
     public static List<PrintBuffer> faultList = new ArrayList<>();
 
     public static int swap(Round round){ 
+        HashSet<Integer> s = new HashSet<>(round.frames);
+        LinkedHashMap<Integer, Integer> memFrames = new LinkedHashMap<>(round.frames, .75f, true);
         int faults = 0;
         for(int i = 0; i< round.pages.size(); i++){
-            if (memFrames.contains(round.pages.get(i))){
-                for(int j = 0; j<memFrames.size(); j++){ //loop through to find index of what frame matches the page
-                    if(memFrames.get(j) == round.pages.get(i)){
-                        int increment = timesUsed.get(i); //get the value of how many times this page has been used
-                        increment++;
-                        timesUsed.set(j,increment);//return the modified value
-                    }
+            if(s.size() < round.frames){ 
+                if (!s.contains(round.pages.get(i))) 
+                { 
+                    s.add(round.pages.get(i)); 
+                    faults++;
                 }
-                System.out.println("No fault"); //debug
-            }
+                memFrames.put(round.pages.get(i), i); 
+                
+                }
             else{
-                if(memFrames.size() < round.frames){ 
-                    memFrames.add(round.pages.get(i));
-                    timesUsed.add(0);//keep track of how many times this varible is used
-                }
-                else{//if the size exeeds the frames, last recently used page is unloaded
-                    for(int k = 0; k<memFrames.size(); k++){//loop through array and find the least used
-
-                    }
-                }
-                faults++;
+                 // Check if current page is not already 
+                // present in the set 
+                if (!s.contains(round.pages.get(i))) 
+                { 
+                    // Find the least recently used pages 
+                    // that is present in the set 
+                    int lru = Integer.MAX_VALUE, val=Integer.MIN_VALUE; 
+                    Iterator<Integer> itr = s.iterator(); 
+                    while (itr.hasNext()) { 
+                        int temp = itr.next(); 
+                        if (memFrames.get(temp) < lru) 
+                        { 
+                            lru = memFrames.get(temp); 
+                            val = temp; 
+                        } 
+                    } 
+                    // Remove the indexes page 
+                    s.remove(val); 
+                   //remove lru from hashmap 
+                    memFrames.remove(val); 
+                    // insert the current page 
+                    s.add(round.pages.get(i)); 
+                    // Increment page faults 
+                    faults++; 
+                } 
+                // Update the current page index 
+                memFrames.put(round.pages.get(i), i); 
+            } 
             }
-        }
-
-
-
+        System.out.println("LRU:"+faults);
         return faults;
     }
 }
